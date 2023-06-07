@@ -67,8 +67,8 @@ exec $SHELL
 ## Installing Python Packages
 
 ```shell
-pip install --upgrade pip
-python3 -m pip install bottle openai requests
+pip3 install --upgrade pip
+pip3 install -r requirements.txt
 ```
 
 ## Starting bottle
