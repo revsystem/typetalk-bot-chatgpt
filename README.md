@@ -51,7 +51,7 @@ You can also download ngrok binary for each OS from [Install ngrok](https://ngro
 
 ## Setting environment variables
 
-Add environment variables to your shell dotfile like `.zshrc`. You can find the Typetalk topic ID on the bot detailed view page.
+Add environment variables to your shell dotfile like `.zshenv`. You can find the Typetalk topic ID on the bot detailed view page.
 
 ```shell
 export OPENAI_API_KEY="yyyy"
