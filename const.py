@@ -8,7 +8,7 @@ import os
 TYPETALK_API_URL = "https://typetalk.com/api/v1"
 
 # Typetalk Topic parameters
-TYPETALK_TOPIC_ID = 000000 # replace to your topic ID.
+TYPETALK_TOPIC_ID = os.environ["TYPETALK_TOPIC_ID"]
 TYPETALK_API_ENDPOINT = f"{TYPETALK_API_URL}/topics/{TYPETALK_TOPIC_ID}"
 TYPETALK_TOKEN = os.environ["TYPETALK_TOKEN"]
 

@@ -51,11 +51,12 @@ You can also download ngrok binary for each OS from [Install ngrok](https://ngro
 
 ## Setting environment variables
 
-Add environment variables to your shell dotfile like `.zshrc`.
+Add environment variables to your shell dotfile like `.zshenv`. You can find the Typetalk topic ID on the bot detailed view page.
 
 ```shell
 export OPENAI_API_KEY="yyyy"
 export TYPETALK_TOKEN="xxxx"
+export TYPETALK_TOPIC_ID="zzzzzz'
 ```
 
 Apply shell configuration.
@@ -67,8 +68,8 @@ exec $SHELL
 ## Installing Python Packages
 
 ```shell
-pip install --upgrade pip
-python3 -m pip install bottle openai requests
+pip3 install --upgrade pip
+pip3 install -r requirements.txt
 ```
 
 ## Starting bottle
