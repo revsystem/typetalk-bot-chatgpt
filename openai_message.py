@@ -1,5 +1,3 @@
-# coding: utf-8
-
 from const import *
 
 def create_prompt_to_summarise_message(user_messages: str) -> list:

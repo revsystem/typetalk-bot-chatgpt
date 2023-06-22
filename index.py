@@ -1,5 +1,3 @@
-# coding: utf-8
-
 from bottle import route, run, request
 from const import *
 from openai_message import (
