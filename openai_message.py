@@ -1,4 +1,6 @@
 from const import *
+import openai
+
 
 def create_prompt_to_summarise_message(user_messages: str) -> list:
     """
@@ -12,16 +14,16 @@ def create_prompt_to_summarise_message(user_messages: str) -> list:
 
     prompt = [
         {
-            'role': 'user',
-            'content': "Please summarise the following message in approximately 30 words." + "\n" + user_messages
+            "role": "user",
+            "content": "Please summarise the following message in approximately 30 words."
+            + "\n"
+            + user_messages,
         },
-        {
-            'role': 'assistant',
-            'content': '{summarised message.}'
-        },
+        {"role": "assistant", "content": "{summarised message.}"},
     ]
 
     return prompt
+
 
 def get_message(prompt_message: list = []) -> str:
     """
@@ -36,9 +38,8 @@ def get_message(prompt_message: list = []) -> str:
         messages=prompt_message,
         temperature=OPENAI_TEMPERATURE,
         max_tokens=OPENAI_MAX_TOKENS,
-        top_p=OPENAI_TOP_P,
         frequency_penalty=OPENAI_FREQUENCY_PENALTY,
-        presence_penalty=OPENAI_PRESENCE_PENALTY
+        presence_penalty=OPENAI_PRESENCE_PENALTY,
     )
 
     message = response["choices"][0]["message"]["content"]
