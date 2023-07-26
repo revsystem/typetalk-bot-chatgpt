@@ -1,15 +1,13 @@
 from bottle import route, run, request
 from const import *
-from openai_message import (
-    create_prompt_to_summarise_message,
-    get_message
-)
+from openai_message import create_prompt_to_summarise_message, get_message
 
 from typetalk import (
     set_typetalk_talkName,
     get_typetalk_talk,
     post_typetalk_message,
 )
+
 
 # Receive data from Typetalk.
 @route("/", method="POST")
@@ -19,8 +17,8 @@ def handle_event():
     # Debug
     print(f"data: {data}\n")
 
-    user_message: str = data["post"]["message"]
-    user_postid: int = data["post"]["id"]
+    user_message = data["post"]["message"]
+    user_postid = data["post"]["id"]
 
     # まとめIDがある(会話が継続している場合)
     if len(data["post"]["talks"]):
@@ -47,11 +45,7 @@ def handle_event():
     print(f"return_message: {return_message}\n")
 
     # Post OpenAI API responses to the Typetalk topic.
-    post_typetalk_message(
-        return_message,
-        user_postid,
-        talk_id
-    )
+    post_typetalk_message(return_message, user_postid, talk_id)
 
 
 def main():

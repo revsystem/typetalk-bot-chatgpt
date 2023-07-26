@@ -1,6 +1,7 @@
 from const import *
 import requests
 
+
 def set_typetalk_talkName(talk_name: str, user_postid: int) -> int:
     """
     Create a Typetalk tag and post the PostID you add to the tag.
@@ -12,14 +13,9 @@ def set_typetalk_talkName(talk_name: str, user_postid: int) -> int:
     """
 
     api_endpoint = f"{TYPETALK_API_URL}/topics/{TYPETALK_TOPIC_ID}/talks"
-    headers = {
-        "X-TYPETALK-TOKEN": TYPETALK_TOKEN
-    }
+    headers = {"X-TYPETALK-TOKEN": TYPETALK_TOKEN}
 
-    payload = {
-        "talkName": talk_name,
-        "postIds[0]": user_postid
-    }
+    payload = {"talkName": talk_name, "postIds[0]": user_postid}
 
     response = requests.post(api_endpoint, headers=headers, data=payload)
     talk_id = response.json()["talk"]["id"]
@@ -42,15 +38,12 @@ def get_typetalk_talk(talk_id: int) -> list:
     # message order.
     talk_direction = TYPETALK_TAKL_DIRECTION
 
-    api_endpoint = f"{TYPETALK_API_URL}/topics/{TYPETALK_TOPIC_ID}/talks/{talk_id}/posts"
-    headers = {
-        "X-TYPETALK-TOKEN": TYPETALK_TOKEN
-    }
+    api_endpoint = (
+        f"{TYPETALK_API_URL}/topics/{TYPETALK_TOPIC_ID}/talks/{talk_id}/posts"
+    )
+    headers = {"X-TYPETALK-TOKEN": TYPETALK_TOKEN}
 
-    payload = {
-        "count": talk_count,
-        "direction": talk_direction
-    }
+    payload = {"count": talk_count, "direction": talk_direction}
 
     response = requests.get(api_endpoint, headers=headers, params=payload)
     talk_posts = response.json()["posts"]
@@ -60,22 +53,19 @@ def get_typetalk_talk(talk_id: int) -> list:
 
     prompt = []
 
-    system = {
-        "role": "system",
-        "content": CHARACTER
-    }
+    system = {"role": "system", "content": CHARACTER}
 
     for message in sorted_messages:
-        text = message['message']
+        text = message["message"]
 
         comment = {}
-        if not message['account']['isBot']:
-            comment['role'] = 'user'
-            comment['content'] = text
+        if not message["account"]["isBot"]:
+            comment["role"] = "user"
+            comment["content"] = text
 
-        elif message['account']['isBot']:
-            comment['role'] = 'assistant'
-            comment['content'] = text
+        elif message["account"]["isBot"]:
+            comment["role"] = "assistant"
+            comment["content"] = text
 
         prompt.append(comment)
 
@@ -95,19 +85,9 @@ def post_typetalk_message(message: str, post_id: int, talk_id: int) -> str:
     :return: JSON
     """
 
-    headers = {
-        "X-TYPETALK-TOKEN": TYPETALK_TOKEN
-    }
-    payload = {
-        "message": message,
-        "replyTo": post_id,
-        "talkIds[0]": talk_id
-    }
+    headers = {"X-TYPETALK-TOKEN": TYPETALK_TOKEN}
+    payload = {"message": message, "replyTo": post_id, "talkIds[0]": talk_id}
 
-    response = requests.post(
-        TYPETALK_API_ENDPOINT,
-        headers=headers,
-        data=payload
-    )
+    response = requests.post(TYPETALK_API_ENDPOINT, headers=headers, data=payload)
 
     return response.json()
